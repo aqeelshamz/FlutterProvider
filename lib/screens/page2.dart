@@ -4,7 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-class Page2 extends StatelessWidget {
+String providerValue;
+
+class Page2 extends StatefulWidget {
+  @override
+  _Page2State createState() => _Page2State();
+}
+
+class _Page2State extends State<Page2> {
+  @override
+  void didChangeDependencies() {
+    providerValue = Provider.of<TestProvider>(context).value;
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,11 +33,7 @@ class Page2 extends StatelessWidget {
               },
               child: Text("Go to page 3"),
             ),
-            Consumer<TestProvider>(
-              builder: (context, value, child) {
-                return Text(value.value);
-              },
-            ),
+            Text("Using provider value from Variable: " + providerValue),
           ],
         ),
       )),

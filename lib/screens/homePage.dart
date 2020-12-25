@@ -23,12 +23,9 @@ class Home extends StatelessWidget {
               },
               child: Text("Go to page 2"),
             ),
-            Consumer<TestProvider>(
-              builder: (context, value, child) {
-                print("consumer rebuild");
-                return Text(value.value);
-              },
-            ),
+            Consumer<TestProvider>(builder: (context, provider, child){
+              return Text(provider.value);
+            }),
             TextField(
               onChanged: (txt) {
                 _text = txt;
@@ -38,12 +35,17 @@ class Home extends StatelessWidget {
               onPressed: () {
                 Provider.of<TestProvider>(context, listen: false)
                     .changeValue(_text);
+                    printValue(context);
               },
               child: Text("Change value"),
             )
           ],
         )),
-      ),
+      ),  
     );
+  }
+
+  printValue(BuildContext context) {
+    print(context.read<TestProvider>().value);
   }
 }
