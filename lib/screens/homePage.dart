@@ -33,8 +33,7 @@ class Home extends StatelessWidget {
             ),
             FlatButton(
               onPressed: () {
-                Provider.of<TestProvider>(context, listen: false)
-                    .changeValue(_text);
+                context.read<TestProvider>().changeValue(_text);
                     printValue(context);
               },
               child: Text("Change value"),
